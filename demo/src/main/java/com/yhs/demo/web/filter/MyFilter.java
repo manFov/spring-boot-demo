@@ -9,6 +9,10 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import com.yhs.demo.properties.ApplicationProperties;
 public class MyFilter implements Filter{
 
 	@Override
@@ -25,7 +29,8 @@ public class MyFilter implements Filter{
 
 	@Override
 	public void init(FilterConfig paramFilterConfig) throws ServletException {
-		System.out.println("do init !!!");
+		WebApplicationContext content = WebApplicationContextUtils.getWebApplicationContext(paramFilterConfig.getServletContext());
+		System.out.println(((ApplicationProperties)content.getBean("applicationProperties")).getAuthor());
 	}
 
 }
